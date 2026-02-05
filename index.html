@@ -1,1 +1,111 @@
-// fnkjfgn
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Intro Animation</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+/* FULL SCREEN INTRO */
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e9f5e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* LOGO CONTAINER */
+.logo-box {
+  width: 120px;
+  height: 120px;
+}
+
+/* LOGO ANIMATION */
+.logo {
+  width: 100%;
+  height: 100%;
+  border: 8px solid #5a5a4a;
+  border-radius: 12px;
+  position: relative;
+  animation: rotate 3s ease-in-out;
+}
+
+/* INNER SPIRAL EFFECT */
+.logo::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  border: 6px solid #5a5a4a;
+  border-radius: 8px;
+  animation: rotateReverse 3s ease-in-out;
+}
+
+/* ROTATION */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateReverse {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO ANIMATION -->
+<div id="intro">
+  <div class="logo-box">
+    <div class="logo"></div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="content" class="d-none">
+  <div class="container text-center mt-5">
+    <h1>Welcome to Website 🚀</h1>
+    <p>Main content starts here</p>
+  </div>
+</div>
+
+<script>
+window.onload = function () {
+  const intro = document.getElementById("intro");
+  const content = document.getElementById("content");
+
+  if (!localStorage.getItem("visited")) {
+    setTimeout(() => {
+      intro.style.display = "none";
+      content.classList.remove("d-none");
+      localStorage.setItem("visited", "true");
+    }, 3000);
+  } else {
+    intro.style.display = "none";
+    content.classList.remove("d-none");
+  }
+};
+</script>
+
+</body>
+</html>
